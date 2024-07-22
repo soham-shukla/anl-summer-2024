@@ -26,21 +26,30 @@ pdf_content = pdf_content[:2000]
 
 #print(pdf_content)
 
-question = input("what can i help you with?")
+while True:
+    question = input("what can i help you with? ('quit' to exit)")
 
-response = ollama.chat(model='llama3custom', messages=[
-    {
-        'role': 'system',
-        'content': 'You are an assistant helping to answer questions based on a provided document.'
-    },
-    {
-        'role': 'user',
-        'content': f'This is the content of the document: {pdf_content}'
-    },
-    {
-        'role': 'user',
-        'content': f'This is the question about the document: {question}'
-    }
-])
+    #exit loop
+    if question.lower() == 'quit':
+        print("exiting...")
+        break
 
-print(response['message']['content'])
+    try:
+        response = ollama.chat(model='llama3custom', messages=[
+            {
+                'role': 'system',
+                'content': 'You are an assistant helping to answer questions based on a provided document.'
+            },
+            {
+                'role': 'user',
+                'content': f'This is the content of the document: {pdf_content}'
+            },
+            {
+                'role': 'user',
+                'content': f'This is the question about the document: {question}'
+            }
+        ])
+        print(response['message']['content'])
+        
+    except Exception as e:
+        print(f'an error has occured with the model" {str(e)}')
