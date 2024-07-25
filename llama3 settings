@@ -4,9 +4,9 @@
 from llama3:8b 
 
 #parameters
-PARAMETER temperature 1
+PARAMETER temperature .5
 
-PARAMETER stop <|start_header_id|>
+PARAMETER stop <|start_header_id|>em
 PARAMETER stop <|end_header_id|>
 PARAMETER stop <|eot_id|>
 
